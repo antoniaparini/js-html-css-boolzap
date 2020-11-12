@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"> 
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css'/>
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <!-- AREA APP -->
+    <div id="app" class="container">
+        <aside class="side">
+            <!-- AREA USER LIST -->
+            <div class="userlist">
+                <div class="user" v-model="user">
+                    <img class="img" :src="'./img/avatar'+ user.avatar +'.jpg'" alt="avatar utente">
+                    <h3 class="username">{{user.name}}</h3>
+                </div>
+                <div class="icone">
+                    <i class="fas fa-circle-notch"></i>
+                    <i class="fas fa-comment-alt"></i>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+            </div>
+
+            <!-- AREA NOTIFICHE PUSH -->
+            <div class="notifica">
+                <div class="icona-notifica">
+                    <i class="fas fa-bell-slash"></i>
+                </div>
+                <p class="ricevi-notifiche">Ricevi notifiche di nuovi messaggi<small class="notifiche-desk">Attiva notifiche desktop</small></p>
+            </div>
+
+            <!-- AREA SEARCH BAR -->
+            <div class="search">
+                <div class="input-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Cerca o inizia una nuova chat">
+                </div>
+            </div>
+
+            <!-- LISTA CHAT-->
+            <div class="listachat">
+                <ul class="contacts">
+                    <li v-for="(contact, index) in contacts" class="contact">
+                        <!--debug consiglio di Fabio src-->
+                        <img class="img" :src="'./img/avatar'+ contact.avatar +'.jpg'" alt="">
+                        <span class="nome-ctc">{{contact.name}}</span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="content">
+            <section class="mc-header">
+                <div class="header-user">
+                    <img class="img" src="./img/avatar_1.jpg" alt="">
+                    <h3 class="active-user">Michele<small class="activity">Ultimo accesso oggi alle 10:35</small></h3>
+                </div>
+                <div class="icone">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-paperclip"></i>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+            </section>
+
+            <!--AREA CHAT-->
+            <section class="area-chat"></section>
+            <!--AREA FOOTER-->
+            <section class="area-footer">
+                <i class="far fa-smile"></i>
+                <input type="text" placeholder="Scrivi un messaggio">
+                <i class="fas fa-microphone"></i>
+            </section>
+        </main>
+
+    </div>
+    <!--VUE JS-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!--JS-->
+    <script src="./js/main.js"></script>
+</body>
+</html>
