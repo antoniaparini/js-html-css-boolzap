@@ -94,7 +94,12 @@ var app = new Vue({
                     }
                 ],
             },
-        ]
+        ],
+        actUser: '0',
     },
-    methods: {}
+        methods: {
+        openChat(index) {
+                this.actUser = index;
+            }
+    }
 });

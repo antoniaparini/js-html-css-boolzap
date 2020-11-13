@@ -12,7 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: linear-gradient(to bottom, #009688 0%, #009688 18%, #d2dbdc 18%, #d2dbdc 100%);/*DEBUG VIDEO LEZIONE*/
+    background-image: linear-gradient(to bottom, #009688 0%, #009688 18%, #d2dbdc 18%, #d2dbdc 100%);
 }
 
 /*UTILITIES*/
@@ -38,18 +38,16 @@ h3 {
     padding-right: 5px;
 }
 
-
-
-
-
-
-
-
-
-
-
 input::placeholder {
     color: #b5b9bb;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
 }
 
 /*CONTENT*/
@@ -69,7 +67,7 @@ input::placeholder {
     border-right: 1px solid #d6d6d6;
 }
 
-.userlist {
+.userbar {
     width: 100%;
     display: inline-flex;
     align-items: center;
@@ -78,7 +76,7 @@ input::placeholder {
     background: #eaeaea;
 }
 
-.userlist .user {
+.userbar .user {
     flex-grow: 1;
     display: inline-flex;
     align-items: center;
@@ -93,7 +91,7 @@ input::placeholder {
     display: inline-flex;
     justify-content: start;
     align-items: center;
-    padding:20px;
+    padding: 20px;
 }
 
 .icona-notifica {
@@ -111,7 +109,8 @@ input::placeholder {
     font-size: 14px;
     margin-left: 10px;
 }
-.notifiche-desk{
+
+.notifiche-desk {
     display: block;
     font-size: 12px;
     text-decoration: underline;
@@ -122,12 +121,12 @@ input::placeholder {
 
 .search {
     background: #fafafa;
-    padding:5px;
+    padding: 5px;
     display: inline-flex;
     width: 100%;
 }
 
-.input-search {
+.search-box {
     border: 1px solid #f5f5f5;
     background: #fff;
     flex-grow: 1;
@@ -145,9 +144,15 @@ input::placeholder {
 
 .search input {
     line-height: 30px;
-    border: none;
+    border: transparent;
     flex-grow: 1;
 }
+
+.search input:focus {
+    border: 1px solid #74dcff;
+    box-shadow: 0px 0px 2px rgba(0,0,0, .4);
+}
+
 
 /*LISTA CHAT*/
 
@@ -165,10 +170,14 @@ input::placeholder {
     display: flex;
     align-items: center;
     border-top: 1px solid #f5f5f5;
+    cursor: pointer;
+    }
 
+li.contact:hover {
+    background: #eee;
 }
 
-.listachat ul li:hover {
+li.active {
     background: #eee;
 }
 
@@ -185,38 +194,113 @@ input::placeholder {
     flex-direction: column;
 }
 
-/*HEADER*/
 
 .mc-header {
     background: #eaeaea;
     width: 100%;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
 }
 
 .mc-header .header-user {
-    flex-grow: 1;
     display: inline-flex;
     align-items: center;
-}
+    }
 
 .mc-header .header-user h3 small {
     font-size: 12px;
     color: #70797c;
-    display:block;
-}
+    display: block;
+    }
+
 
 /*CONTENT*/
-.area-chat {
+
+.chat-boxes {
     flex-grow: 1;
     background-image: url(../img/mine.jpg);
     background-position: center;
     background-repeat: repeat;
+    padding: 30px 50px;
+    overflow-y: auto;
 }
 
-/*FOOTER*/
+.msg-sent {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.msg-received {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.box {
+    width: 400px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: left;
+    position: relative;
+}
+
+.box i {
+        display: none;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        color: #ccc;
+        font-size: 16px;
+    }
+
+.box:hover i {
+        display: block;
+    }
+
+.box small {
+        color: #ccc;
+        display: block;
+        text-align: right;
+        margin-top: 5px;
+    }
+
+.sent {
+    background: #cbfbb3;
+}
+
+.sent::before {
+        content: '';
+        position: absolute;
+        bottom: 10px;
+        right: -4px;
+        width: 8px;
+        height: 8px;
+        background: #cbfbb3;
+        transform: rotate(45deg);
+    }
+
+.received {
+    background: #fff;
+}
+
+.received::before {
+        content: '';
+        position: absolute;
+        bottom: 10px;
+        left: -4px;
+        width: 8px;
+        height: 8px;
+        background: #fff;
+        transform: rotate(45deg);
+    }
+
+
+/*AREA FOOTER*/
 .area-footer {
     background: #f4eeea;
     display: inline-flex;
@@ -229,13 +313,18 @@ input::placeholder {
     margin: 0 20px;
     color: #697376;
     font-size: 20px;
-}
+    }
 
 .area-footer input {
     flex-grow: 1;
     margin: 0 20px;
-    border: none;
+    border: transparent;
     border-radius: 5px;
     line-height: 25px;
     padding: 10px;
-}
+    }
+
+.area-footer input:focus {
+    border: 2px solid #74dcff;
+    box-shadow: 0px 0px 3px rgba(0,0,0, .4);
+        }
