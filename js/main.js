@@ -1,14 +1,44 @@
 /**
  * Boolzapp Vue
  * 
- * Descrizione Milestone 3
+ MILESTONE 3
+
 Aggiungere la funzionalità di inserimento messaggi
 Il messaggio aggiunto dovrà essere inserito nella conversazione del contatto attivo al momento dell' inserimento, come visto in classe all'assegnazione
 Dopo 1 secondo dall' inserimento del messaggio avremo una risposta automatica 'ok' da parte del contatto
 Includere la data e orario nei nuovi messaggi utilizzando Day.js
- * 
+
+**APPUNTI**
+LOADING LOCAL ON BROWSER
+
+ON DEMAND
+
+<script src="path/to/dayjs/locale/de"></script>
+<script>
+  dayjs.locale('de') // use locale globally
+  dayjs().locale('de').format() // use locale in a specific instance
+</script>
+
+GET THE LOCALE OBJECT FOR FURTHER USE
+
+<script src="path/to/dayjs/locale/de"></script>
+<!-- Load locale as window.dayjs_locale_NAME -->
+<script>
+var customLocale = window.dayjs_locale_zh_cn // zh-cn -> zh_cn
+</script>
+
+DAY.JS ON CDN
+
+<!-- CDN example (unpkg) -->
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/locale/zh-cn.js"></script>
+<script>dayjs.locale('zh-cn')</script>
+
+*****
  * 
  */
+
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -103,11 +133,34 @@ var app = new Vue({
                 ],
             },
         ],
-        actUser: '0',
+        activeID: '0',
+        newConv: ''
+
     },
-        methods: {
-        openChat(index) {
-                this.actUser = index;
+    methods: {
+        actChat(index) {
+            this.activeID = index;
+        },
+
+        sendAct() {
+            if (this.newConv.trim() !== '') {
+                this.contacts[this.activeID].messages.push({
+                    date: dayjs().format('DD/MM/YY HH:mm:ss'),
+                    message: this.newConv.trim(),
+                    status: 'sent'
+                });
+                this.newConv = '';
+                setTimeout(this.usrReply(), 2000);
+
             }
+        },
+
+        usrReply() {
+            this.contacts[this.activeID].messages.push({
+                date: dayjs().format('DD/MM/YY HH:mm:ss'),
+                message: 'Ti chiamo più tardi! Ora, non posso chattare. :-)',
+                status: 'received'
+            });
+        }
     }
 });

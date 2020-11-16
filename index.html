@@ -1,41 +1,44 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boolean Whatsapp</title>
+    <title>BOOLZAP</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css' />
     <link rel="stylesheet" href="./css/styles.css">
+    <!--VUE JS-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   
 </head>
 <body>
 
     <!-- AREA APP -->
     <div id="app" class="container">
+
+        <!-- AREA USERS LIST -->
         <aside class="side">
-            <!-- AREA USER LIST -->
             <div class="userbar">
                 <div class="user">
                     <!--correzione esercizio area alt > user.name con Paolo-->
                     <img class="img" :src="'./img/avatar'+ user.avatar +'.jpg'" alt="User avatar">
                     <h3 class="username">{{user.name}}</h3>
                 </div>
-                <div class="icone">
+                <div class="icons">
                     <i class="fas fa-circle-notch"></i>
                     <i class="fas fa-comment-alt"></i>
                     <i class="fas fa-ellipsis-v"></i>
                 </div>
             </div>
-            <!-- AREA NOTIFICHE PUSH -->
+            <!--AREA NOTIFICHE-->
             <div class="notifica">
                 <div class="icona-notifica">
                     <i class="fas fa-bell-slash"></i>
                 </div>
                 <p class="ricevi-notifiche">Ricevi notifiche di nuovi messaggi<small class="notifiche-desk">Attiva notifiche desktop</small></p>
             </div>
-            <!-- AREA SEARCH BAR -->
+            <!--AREA SEARCH-->
             <div class="search">
                 <div class="search-box">
                     <i class="fas fa-search"></i>
@@ -43,12 +46,12 @@
                 </div>
             </div>
             <!-- LISTA CHAT-->
-            <div class="listachat">
+            <div class="chatlist">
                 <ul class="contacts">
-                    <li v-for="(contact, index) in contacts" class="contact" :class="actUser == index ? 'active' : ''" @click="openChat(index)">
+                    <li v-for="(contact, index) in contacts" class="contact" :class="activeID == index ? 'active' : ''" @click="actChat(index)">
                         <!--correzione esercizio area alt > user.name con Paolo-->
                         <img class="img" :src="'./img/avatar'+ contact.avatar +'.jpg'" alt="">
-                        <span class="nome-ctc">{{contact.name}}</span>
+                        <span class="contact-name">{{contact.name}}</span>
                     </li>
                 </ul>
             </div>
@@ -58,10 +61,10 @@
             <section class="mc-header">
                 <div class="header-user">
                     <!--correzione esercizio area alt > user.name con Paolo-->
-                    <img class="img" :src="'./img/avatar' + contacts[actUser].avatar + '.jpg'" alt="avatar">
-                    <h3 class="active-user">{{contacts[actUser].name}}<small class="usr-log">Ultimo accesso oggi alle 10:35</small></h3>
+                    <img class="img" :src="'./img/avatar' + contacts[activeID].avatar + '.jpg'" alt="avatar">
+                    <h3 class="active-user">{{contacts[activeID].name}}<small class="activity">Ultimo accesso oggi alle 10:35</small></h3>
                 </div>
-                <div class="icone">
+                <div class="icons">
                     <i class="fas fa-search"></i>
                     <i class="fas fa-paperclip"></i>
                     <i class="fas fa-ellipsis-v"></i>
@@ -69,8 +72,8 @@
             </section>
             <!--CHATBOXES-->
             <section class="chat-boxes">
-                <div v-for="(message, index) in contacts[actUser].messages" :class="message.status == 'sent' ? 'msg-sent' : 'msg-received'">
-                    <div class="box" :class="message.status == 'sent' ? 'sent' : 'received'">
+                <div v-for="(message, index) in contacts[activeID].messages" :class="message.status == 'sent' ? 'usr-msg-sent' : 'usr-msg-received'">
+                    <div class="box" :class="message.status">
                         <p>{{message.message}}<small>{{message.date}}</small></p>
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -79,16 +82,16 @@
             <!--AREA FOOTER-->
             <section class="area-footer">
                 <i class="far fa-smile"></i>
-                <input type="text" placeholder="Scrivi un messaggio">
+                <input @keyup.enter="sendAct" v-model="newConv" type="text" placeholder="Scrivi un messaggio">
                 <i class="fas fa-microphone"></i>
             </section>
         </main>
     </div>
-    <!-- VUE JS -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- DAYJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.6/dayjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.6/locale/it.min.js"></script>
-    <!--JS-->
+
+    <!-- JS -->
     <script src="./js/main.js"></script>
-</body>
+    </body>
 </html>
