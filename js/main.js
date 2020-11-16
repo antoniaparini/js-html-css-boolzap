@@ -1,5 +1,13 @@
 /**
  * Boolzapp Vue
+ * 
+ * Descrizione Milestone 3
+Aggiungere la funzionalità di inserimento messaggi
+Il messaggio aggiunto dovrà essere inserito nella conversazione del contatto attivo al momento dell' inserimento, come visto in classe all'assegnazione
+Dopo 1 secondo dall' inserimento del messaggio avremo una risposta automatica 'ok' da parte del contatto
+Includere la data e orario nei nuovi messaggi utilizzando Day.js
+ * 
+ * 
  */
 var app = new Vue({
     el: '#app',
